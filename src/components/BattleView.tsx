@@ -1,21 +1,24 @@
 import { useState } from 'react';
 import { useGameStore } from '../store/game-store';
 import { getCorrectRate } from '../engine/case-battle';
+import type { Question } from '../types/game';
 
 export default function BattleView() {
   const { 
     currentCase, currentQuestion, battleState, playerState,
-    answerQuestion, useAction, endTurn, gamePhase
+    answerQuestion, useAction: performAction, endTurn, gamePhase
   } = useGameStore();
   
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState<{ isCorrect: boolean; message: string } | null>(null);
+  const [answeredQuestion, setAnsweredQuestion] = useState<Question | null>(null);
 
   if (!currentCase || !battleState) return null;
 
   const handleAnswer = () => {
     if (selectedOption === null || !currentQuestion) return;
+    setAnsweredQuestion(currentQuestion);
     const res = answerQuestion(selectedOption);
     setResult(res);
     setShowResult(true);
@@ -25,9 +28,11 @@ export default function BattleView() {
   const handleNext = () => {
     setShowResult(false);
     setResult(null);
+    setAnsweredQuestion(null);
   };
 
   const correctRate = getCorrectRate(battleState);
+  const displayedQuestion = showResult && answeredQuestion ? answeredQuestion : currentQuestion;
 
   return (
     <div className="battle-view">
@@ -60,15 +65,15 @@ export default function BattleView() {
         </div>
       </div>
 
-      {currentQuestion && gamePhase !== 'event' && (
+      {displayedQuestion && gamePhase !== 'event' && (
         <div className="question-area">
-          <div className="question-scenario">📖 {currentQuestion.scenario}</div>
-          <div className="question-text">{currentQuestion.question}</div>
+          <div className="question-scenario">📖 {displayedQuestion.scenario}</div>
+          <div className="question-text">{displayedQuestion.question}</div>
           
           {!showResult ? (
             <>
               <div className="options-list">
-                {currentQuestion.options.map((opt, idx) => (
+                {displayedQuestion.options.map((opt, idx) => (
                   <button
                     key={idx}
                     className={`option-btn ${selectedOption === idx ? 'selected' : ''}`}
@@ -93,7 +98,7 @@ export default function BattleView() {
               </div>
               {!result?.isCorrect && (
                 <div className="explanation">
-                  <strong>解析：</strong><br/>{currentQuestion.explanation}
+                  <strong>解析：</strong><br/>{displayedQuestion.explanation}
                 </div>
               )}
               <button className="action-btn primary" onClick={handleNext}>
@@ -105,16 +110,16 @@ export default function BattleView() {
       )}
 
       <div className="action-panel">
-        <button className="action-btn" onClick={() => useAction('study')} disabled={playerState.resources.energy < 15}>
+        <button className="action-btn" onClick={() => performAction('study')} disabled={playerState.resources.energy < 15}>
           📚 学习专项 (-15⚡)
         </button>
-        <button className="action-btn" onClick={() => useAction('expert')} disabled={playerState.resources.energy < 5 || playerState.resources.cash < 1000}>
+        <button className="action-btn" onClick={() => performAction('expert')} disabled={playerState.resources.energy < 5 || playerState.resources.cash < 1000}>
           👨‍💼 请专家 (-5⚡ -1000💰)
         </button>
-        <button className="action-btn" onClick={() => useAction('qc')} disabled={playerState.resources.energy < 15}>
+        <button className="action-btn" onClick={() => performAction('qc')} disabled={playerState.resources.energy < 15}>
           🔍 质量控制 (-15⚡)
         </button>
-        <button className="action-btn" onClick={() => useAction('rest')}>
+        <button className="action-btn" onClick={() => performAction('rest')}>
           ☕ 休息 (+30⚡)
         </button>
         <button className="action-btn" onClick={endTurn}>
