@@ -68,7 +68,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   startCase: (caseId) => {
-    const { playerState, allCases, allQuestions, questionHistory } = get();
+    const { playerState, allCases, allQuestions } = get();
     const caseData = allCases.find(c => c.id === caseId);
     if (!caseData) return false;
     
@@ -91,24 +91,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const firstQid = caseData.questions[0];
     const firstQ = allQuestions.find(q => q.id === firstQid) || null;
     
-    const nextPlayerState = {
-      ...playerState,
-      resources: newResources,
-      activeCaseId: caseId,
-    };
-    
     set({
       currentCase: caseData,
       battleState: battle,
       currentQuestion: firstQ,
       gamePhase: 'case-battle',
-      playerState: nextPlayerState,
-    });
-    saveGame({
-      version: '1.0.0-mvp',
-      playerState: nextPlayerState,
-      battleState: battle,
-      questionHistory,
+      playerState: {
+        ...playerState,
+        resources: newResources,
+        activeCaseId: caseId,
+      },
     });
     return true;
   },
@@ -119,7 +111,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       return { isCorrect: false, message: '无当前题目' };
     }
     
-    const result = processAnswer(battleState, currentQuestion, selectedIndex);
+    const result = processAnswer(battleState, currentQuestion, selectedIndex, playerState.skills);
     const isCorrect = result.isCorrect;
     
     // Update question history
@@ -151,9 +143,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const victory = checkVictory(result.newBattle, currentCase);
     const failure = checkFailure(result.newBattle);
     
-    let newPhase: GameStore['gamePhase'];
-    let eventMsg: string | null;
-    const newCompleted = [...playerState.completedCases];
+    let newPhase: GameStore['gamePhase'] = 'case-battle';
+    let eventMsg: string | null = null;
+    let newCompleted = [...playerState.completedCases];
     let newUnlocked = [...playerState.unlockedCases];
     let newSkills = { ...playerState.skills };
     
@@ -184,22 +176,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const nextQid = availableQs.length > 0 ? availableQs[0] : currentCase.questions[nextIdx % currentCase.questions.length];
       const nextQ = allQuestions.find(q => q.id === nextQid) || null;
       
-      const nextPlayerState = {
-        ...playerState,
-        resources: newResources,
-        vulnerabilities: newVulns,
-      };
       set({
         currentQuestion: nextQ,
         battleState: result.newBattle,
-        playerState: nextPlayerState,
-        questionHistory: newQHist,
-      });
-      saveGame({
-        version: '1.0.0-mvp',
-        playerState: nextPlayerState,
-        battleState: result.newBattle,
-        questionHistory: newQHist,
       });
       
       return { 
@@ -208,30 +187,22 @@ export const useGameStore = create<GameStore>((set, get) => ({
       };
     }
     
-    const nextPlayerState = {
-      ...playerState,
-      resources: newResources,
-      skills: newSkills,
-      vulnerabilities: newVulns,
-      completedCases: newCompleted,
-      unlockedCases: [...new Set(newUnlocked)],
-      activeCaseId: victory || failure ? null : playerState.activeCaseId,
-    };
-    
     set({
       battleState: result.newBattle,
-      playerState: nextPlayerState,
+      playerState: {
+        ...playerState,
+        resources: newResources,
+        skills: newSkills,
+        vulnerabilities: newVulns,
+        completedCases: newCompleted,
+        unlockedCases: [...new Set(newUnlocked)],
+        activeCaseId: victory || failure ? null : playerState.activeCaseId,
+      },
       questionHistory: newQHist,
       gamePhase: newPhase,
       eventMessage: eventMsg,
       currentCase: victory || failure ? null : currentCase,
       currentQuestion: null,
-    });
-    saveGame({
-      version: '1.0.0-mvp',
-      playerState: nextPlayerState,
-      battleState: victory || failure ? null : result.newBattle,
-      questionHistory: newQHist,
     });
     
     return { isCorrect, message: eventMsg || '' };
@@ -271,17 +242,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const newResources = applyResourceChanges(playerState.resources, changes);
     const newBattle = { ...battleState, ...battleChanges };
     
-    const nextPlayerState = { ...playerState, resources: newResources };
-    
     set({
-      playerState: nextPlayerState,
+      playerState: { ...playerState, resources: newResources },
       battleState: newBattle,
-    });
-    saveGame({
-      version: '1.0.0-mvp',
-      playerState: nextPlayerState,
-      battleState: newBattle,
-      questionHistory: get().questionHistory,
     });
   },
 
@@ -293,26 +256,18 @@ export const useGameStore = create<GameStore>((set, get) => ({
       energy: playerState.resources.maxEnergy - playerState.resources.energy,
     });
     
-    const nextPlayerState = {
-      ...playerState,
-      currentTurn: playerState.currentTurn + 1,
-      resources: newResources,
-      activeCaseId: null,
-    };
-    
     set({
-      playerState: nextPlayerState,
+      playerState: {
+        ...playerState,
+        currentTurn: playerState.currentTurn + 1,
+        resources: newResources,
+        activeCaseId: null,
+      },
       battleState: null,
       currentCase: null,
       currentQuestion: null,
       gamePhase: 'office',
       eventMessage: `第${playerState.currentTurn}天结束。扣除固定成本${-costChanges.cash!}。`,
-    });
-    saveGame({
-      version: '1.0.0-mvp',
-      playerState: nextPlayerState,
-      battleState: null,
-      questionHistory: get().questionHistory,
     });
   },
 
@@ -325,15 +280,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const newVulns = playerState.vulnerabilities.map(v => 
       v.id === vulnId ? clearVulnerability(v, reason) : v
     );
-    const nextPlayerState = { ...playerState, vulnerabilities: newVulns };
     set({
-      playerState: nextPlayerState,
-    });
-    saveGame({
-      version: '1.0.0-mvp',
-      playerState: nextPlayerState,
-      battleState: get().battleState,
-      questionHistory: get().questionHistory,
+      playerState: { ...playerState, vulnerabilities: newVulns },
     });
   },
 
@@ -356,20 +304,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
   load: () => {
     const data = loadGame();
     if (data) {
-      const { allCases, allQuestions } = get();
-      const currentCase = data.battleState
-        ? allCases.find(c => c.id === data.battleState?.caseId) || null
-        : null;
-      const currentQuestion = currentCase
-        ? allQuestions.find(q => !data.battleState?.answeredQuestionIds.includes(q.id) && currentCase.questions.includes(q.id)) ||
-          allQuestions.find(q => q.id === currentCase.questions[0]) ||
-          null
-        : null;
       set({
         playerState: data.playerState,
         battleState: data.battleState,
-        currentCase,
-        currentQuestion,
         questionHistory: data.questionHistory || {},
         gamePhase: data.battleState ? 'case-battle' : 'office',
       });
@@ -384,24 +321,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
       .filter(c => c.initialStatus === 'available')
       .map(c => c.id);
     
-    const nextPlayerState = {
-      ...createInitialPlayerState(),
-      unlockedCases: initialUnlocked,
-    };
-    
     set({
-      playerState: nextPlayerState,
+      playerState: {
+        ...createInitialPlayerState(),
+        unlockedCases: initialUnlocked,
+      },
       battleState: null,
       currentCase: null,
       currentQuestion: null,
       gamePhase: 'office',
       eventMessage: null,
-      questionHistory: {},
-    });
-    saveGame({
-      version: '1.0.0-mvp',
-      playerState: nextPlayerState,
-      battleState: null,
       questionHistory: {},
     });
   },

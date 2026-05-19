@@ -4,31 +4,80 @@ export default function ResourceBar() {
   const { playerState } = useGameStore();
   const { resources, skills, currentTurn } = playerState;
 
+  const getRiskClass = () => {
+    if (resources.risk >= 80) return 'risk-high';
+    if (resources.risk >= 60) return 'risk-med';
+    return 'risk-low';
+  };
+
+  const riskColor = resources.risk >= 80 ? '#e74c3c' : resources.risk >= 60 ? '#f39c12' : 'inherit';
+
   return (
     <div className="resource-bar">
       <div className="resource-item">
-        <span className="resource-label">📅</span>
-        <span className="resource-value">第{currentTurn}天</span>
+        <span className="resource-icon">📅</span>
+        <span className="resource-label">天数</span>
+        <span className="resource-value">{currentTurn}</span>
       </div>
+      
       <div className="resource-item cash">
-        <span className="resource-label">💰</span>
+        <span className="resource-icon">💰</span>
+        <span className="resource-label">现金</span>
         <span className="resource-value">{resources.cash}</span>
+        <div className="resource-bar-fill">
+          <div 
+            className="resource-bar-fill-inner cash" 
+            style={{ width: `${Math.min(100, resources.cash / 100)}%` }}
+          />
+        </div>
       </div>
+      
       <div className="resource-item reputation">
-        <span className="resource-label">⭐</span>
+        <span className="resource-icon">⭐</span>
+        <span className="resource-label">声誉</span>
         <span className="resource-value">{resources.reputation}</span>
+        <div className="resource-bar-fill">
+          <div 
+            className="resource-bar-fill-inner reputation" 
+            style={{ width: `${resources.reputation}%` }}
+          />
+        </div>
       </div>
+      
       <div className="resource-item risk">
-        <span className="resource-label">⚠️</span>
-        <span className="resource-value">{resources.risk}</span>
+        <span className="resource-icon">⚠️</span>
+        <span className="resource-label">风险</span>
+        <span className="resource-value" style={{ color: riskColor }}>
+          {resources.risk}
+        </span>
+        <div className="resource-bar-fill">
+          <div 
+            className={`resource-bar-fill-inner ${getRiskClass()}`} 
+            style={{ width: `${resources.risk}%` }}
+          />
+        </div>
       </div>
+      
       <div className="resource-item energy">
-        <span className="resource-label">⚡</span>
-        <span className="resource-value">{resources.energy}/{resources.maxEnergy}</span>
+        <span className="resource-icon">⚡</span>
+        <span className="resource-label">精力</span>
+        <span className="resource-value">{resources.energy}</span>
+        <div className="resource-bar-fill">
+          <div 
+            className="resource-bar-fill-inner energy" 
+            style={{ width: `${(resources.energy / resources.maxEnergy) * 100}%` }}
+          />
+        </div>
       </div>
+      
       <div className="resource-item">
-        <span className="resource-label">📊</span>
-        <span className="resource-value">会:{skills.accounting} 税:{skills.tax} 法:{skills.economicLaw}</span>
+        <span className="resource-icon">📊</span>
+        <span className="resource-label">熟练度</span>
+        <span className="resource-value" style={{ fontSize: '12px' }}>
+          <span style={{ color: '#4ecdc4' }}>会{skills.accounting}</span>
+          <span style={{ color: '#f39c12' }}> 税{skills.tax}</span>
+          <span style={{ color: '#9b59b6' }}> 法{skills.economicLaw}</span>
+        </span>
       </div>
     </div>
   );

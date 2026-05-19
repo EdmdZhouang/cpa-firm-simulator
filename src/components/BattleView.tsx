@@ -1,41 +1,39 @@
 import { useState } from 'react';
 import { useGameStore } from '../store/game-store';
 import { getCorrectRate } from '../engine/case-battle';
-import type { Question } from '../types/game';
 
 export default function BattleView() {
   const { 
     currentCase, currentQuestion, battleState, playerState,
-    answerQuestion, useAction: performAction, endTurn, gamePhase
+    answerQuestion, useAction, endTurn
   } = useGameStore();
   
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [result, setResult] = useState<{ isCorrect: boolean; message: string } | null>(null);
-  const [answeredQuestion, setAnsweredQuestion] = useState<Question | null>(null);
+  const [lastResult, setLastResult] = useState<{ isCorrect: boolean; message: string } | null>(null);
+  const [questionKey, setQuestionKey] = useState(0);
 
   if (!currentCase || !battleState) return null;
 
   const handleAnswer = () => {
     if (selectedOption === null || !currentQuestion) return;
-    setAnsweredQuestion(currentQuestion);
     const res = answerQuestion(selectedOption);
-    setResult(res);
+    setLastResult(res);
     setShowResult(true);
     setSelectedOption(null);
   };
 
   const handleNext = () => {
     setShowResult(false);
-    setResult(null);
-    setAnsweredQuestion(null);
+    setLastResult(null);
+    setQuestionKey(k => k + 1);
   };
 
   const correctRate = getCorrectRate(battleState);
-  const displayedQuestion = showResult && answeredQuestion ? answeredQuestion : currentQuestion;
 
   return (
     <div className="battle-view">
+      {/* 战斗头部 - 项目作战台 */}
       <div className="battle-header">
         <div className="battle-title">⚔️ {currentCase.title}</div>
         <div className="battle-bars">
@@ -57,23 +55,34 @@ export default function BattleView() {
                 style={{ width: `${battleState.risk}%` }}
               />
             </div>
-            <span className="bar-value">{battleState.risk}%</span>
+            <span className="bar-value" style={{ 
+              color: battleState.risk >= 80 ? '#e74c3c' : battleState.risk >= 60 ? '#f39c12' : 'inherit'
+            }}>
+              {battleState.risk}%
+            </span>
           </div>
         </div>
-        <div style={{ marginTop: 8, fontSize: 12, color: '#aaa' }}>
-          答题: {battleState.questionsAnswered} | 正确: {battleState.correctCount} | 正确率: {correctRate}% | 剩余回合: {battleState.turnsRemaining}
+        <div className="battle-stats">
+          <span>📋 答题: {battleState.questionsAnswered}</span>
+          <span>✓ 正确: {battleState.correctCount}</span>
+          <span>📊 正确率: {correctRate}%</span>
+          <span>⏱️ 剩余: {battleState.turnsRemaining}回合</span>
         </div>
       </div>
 
-      {displayedQuestion && gamePhase !== 'event' && (
-        <div className="question-area">
-          <div className="question-scenario">📖 {displayedQuestion.scenario}</div>
-          <div className="question-text">{displayedQuestion.question}</div>
+      {/* 题目区域 */}
+      {currentQuestion && (
+        <div className="question-area" key={questionKey}>
+          <div className="question-scenario">
+            📖 {currentQuestion.scenario}
+          </div>
+          
+          <div className="question-text">{currentQuestion.question}</div>
           
           {!showResult ? (
             <>
               <div className="options-list">
-                {displayedQuestion.options.map((opt, idx) => (
+                {currentQuestion.options.map((opt, idx) => (
                   <button
                     key={idx}
                     className={`option-btn ${selectedOption === idx ? 'selected' : ''}`}
@@ -93,14 +102,17 @@ export default function BattleView() {
             </>
           ) : (
             <>
-              <div className={`feedback-area ${result?.isCorrect ? 'correct' : 'wrong'}`}>
-                {result?.isCorrect ? '✅ 回答正确！' : '❌ 回答错误！'}
+              <div className={`feedback-area ${lastResult?.isCorrect ? 'correct' : 'wrong'}`}>
+                {lastResult?.isCorrect ? '✅ 回答正确！进度推进' : '❌ 回答错误！风险增加'}
               </div>
-              {!result?.isCorrect && (
+              
+              {!lastResult?.isCorrect && (
                 <div className="explanation">
-                  <strong>解析：</strong><br/>{displayedQuestion.explanation}
+                  <strong>复核意见：</strong><br/>
+                  {currentQuestion.explanation}
                 </div>
               )}
+              
               <button className="action-btn primary" onClick={handleNext}>
                 下一题 →
               </button>
@@ -109,20 +121,44 @@ export default function BattleView() {
         </div>
       )}
 
+      {/* 行动面板 */}
       <div className="action-panel">
-        <button className="action-btn" onClick={() => performAction('study')} disabled={playerState.resources.energy < 15}>
+        <button 
+          className="action-btn" 
+          onClick={() => useAction('study')} 
+          disabled={playerState.resources.energy < 15}
+          title="消耗15精力，提高命中率"
+        >
           📚 学习专项 (-15⚡)
         </button>
-        <button className="action-btn" onClick={() => performAction('expert')} disabled={playerState.resources.energy < 5 || playerState.resources.cash < 1000}>
+        <button 
+          className="action-btn" 
+          onClick={() => useAction('expert')} 
+          disabled={playerState.resources.energy < 5 || playerState.resources.cash < 1000}
+          title="消耗5精力+1000现金，降低风险"
+        >
           👨‍💼 请专家 (-5⚡ -1000💰)
         </button>
-        <button className="action-btn" onClick={() => performAction('qc')} disabled={playerState.resources.energy < 15}>
+        <button 
+          className="action-btn" 
+          onClick={() => useAction('qc')} 
+          disabled={playerState.resources.energy < 15}
+          title="消耗15精力，降低翻车概率"
+        >
           🔍 质量控制 (-15⚡)
         </button>
-        <button className="action-btn" onClick={() => performAction('rest')}>
+        <button 
+          className="action-btn" 
+          onClick={() => useAction('rest')}
+          title="恢复30精力"
+        >
           ☕ 休息 (+30⚡)
         </button>
-        <button className="action-btn" onClick={endTurn}>
+        <button 
+          className="action-btn" 
+          onClick={endTurn}
+          title="结束本回合，扣除固定成本"
+        >
           🌙 结束回合
         </button>
       </div>
