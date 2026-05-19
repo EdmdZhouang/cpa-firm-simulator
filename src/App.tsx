@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useGameStore } from './store/game-store';
-import OfficeView from './components/OfficeView';
+import GameScene from './components/GameScene';
 import ResourceBar from './components/ResourceBar';
 import BattleView from './components/BattleView';
 import ReviewPanel from './components/ReviewPanel';
@@ -31,7 +31,7 @@ function App() {
   if (!contentLoaded) {
     return (
       <div className="loading">
-        <div className="loading-text">🏢 正在进入事务所...</div>
+        <div className="loading-text">正在进入事务所...</div>
         <div className="loading-bar">
           <div className="loading-bar-fill" />
         </div>
@@ -43,16 +43,16 @@ function App() {
     <div className="game-container">
       <ResourceBar />
       
-      {gamePhase === 'office' && <OfficeView />}
+      {gamePhase === 'office' && <GameScene />}
       {(gamePhase === 'case-battle' || gamePhase === 'question') && <BattleView />}
       {gamePhase === 'review' && <ReviewPanel />}
       
       {eventMessage && <EventModal />}
       
       <div className="bottom-bar">
-        <button onClick={save}>💾 保存</button>
-        <button onClick={load}>📂 读档</button>
-        <span>CPA事务所模拟器 v1.2</span>
+        <button onClick={save}>保存</button>
+        <button onClick={load}>读档</button>
+        <span>CPA事务所模拟器 v2.0-alpha</span>
       </div>
     </div>
   );
