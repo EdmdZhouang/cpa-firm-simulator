@@ -52,7 +52,7 @@ function App() {
       <div className="bottom-bar">
         <button onClick={save}>💾 保存</button>
         <button onClick={load}>📂 读档</button>
-        <span>CPA事务所模拟器 v1.1</span>
+        <span>CPA事务所模拟器 v1.2</span>
       </div>
     </div>
   );
