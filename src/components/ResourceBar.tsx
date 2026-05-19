@@ -15,13 +15,13 @@ export default function ResourceBar() {
   return (
     <div className="resource-bar">
       <div className="resource-item">
-        <span className="resource-icon">📅</span>
+        <img src="/sprites/v2/128/office/wall-clock.png" alt="" className="resource-icon-img" />
         <span className="resource-label">天数</span>
         <span className="resource-value">{currentTurn}</span>
       </div>
       
       <div className="resource-item cash">
-        <span className="resource-icon">💰</span>
+        <img src="/sprites/v2/128/feedback/coin-reward.png" alt="" className="resource-icon-img" />
         <span className="resource-label">现金</span>
         <span className="resource-value">{resources.cash}</span>
         <div className="resource-bar-fill">
@@ -33,7 +33,7 @@ export default function ResourceBar() {
       </div>
       
       <div className="resource-item reputation">
-        <span className="resource-icon">⭐</span>
+        <img src="/sprites/v2/128/feedback/reputation-star-badge.png" alt="" className="resource-icon-img" />
         <span className="resource-label">声誉</span>
         <span className="resource-value">{resources.reputation}</span>
         <div className="resource-bar-fill">
@@ -45,7 +45,7 @@ export default function ResourceBar() {
       </div>
       
       <div className="resource-item risk">
-        <span className="resource-icon">⚠️</span>
+        <img src="/sprites/v2/128/feedback/alert-lamp.png" alt="" className="resource-icon-img" />
         <span className="resource-label">风险</span>
         <span className="resource-value" style={{ color: riskColor }}>
           {resources.risk}
@@ -59,7 +59,7 @@ export default function ResourceBar() {
       </div>
       
       <div className="resource-item energy">
-        <span className="resource-icon">⚡</span>
+        <img src="/sprites/v2/128/feedback/fatigue-low-energy.png" alt="" className="resource-icon-img" />
         <span className="resource-label">精力</span>
         <span className="resource-value">{resources.energy}</span>
         <div className="resource-bar-fill">
@@ -71,7 +71,7 @@ export default function ResourceBar() {
       </div>
       
       <div className="resource-item">
-        <span className="resource-icon">📊</span>
+        <img src="/sprites/v2/128/feedback/level-up-badge.png" alt="" className="resource-icon-img" />
         <span className="resource-label">熟练度</span>
         <span className="resource-value" style={{ fontSize: '12px' }}>
           <span style={{ color: '#4ecdc4' }}>会{skills.accounting}</span>

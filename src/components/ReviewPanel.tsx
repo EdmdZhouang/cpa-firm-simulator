@@ -20,11 +20,15 @@ export default function ReviewPanel() {
 
   return (
     <div className="review-panel">
-      <h2>🔍 知识漏洞复盘</h2>
+      <h2>
+        <img src="/sprites/v2/128/folders/review-note-stack.png" alt="" className="panel-icon" />
+        知识漏洞复盘
+      </h2>
       
       {activeVulns.length === 0 && (
-        <p style={{ color: '#2ecc71', marginBottom: 20, fontSize: 16 }}>
-          🎉 没有未清除的漏洞！继续保持！
+        <p className="review-empty">
+          <img src="/sprites/v2/128/feedback/pass-stamp.png" alt="" className="empty-icon" />
+          没有未清除的漏洞！继续保持！
         </p>
       )}
       
@@ -35,6 +39,11 @@ export default function ReviewPanel() {
             className={`vuln-card ${archivingId === v.id ? 'vuln-archiving' : ''}`}
           >
             <div className="vuln-header">
+              <img 
+                src={`/sprites/v2/128/folders/folder-${v.subject === '会计' ? 'accounting' : v.subject === '税法' ? 'tax' : 'law'}.png`} 
+                alt="" 
+                className="vuln-folder-icon" 
+              />
               <span className="vuln-subject">{v.subject}</span>
               <span className={`vuln-level ${v.riskLevel}`}>{v.riskLevel}</span>
             </div>
@@ -55,7 +64,8 @@ export default function ReviewPanel() {
                 onClick={() => handleClear(v.id)}
                 disabled={archivingId === v.id}
               >
-                {archivingId === v.id ? '归档中...' : '✓ 清除漏洞'}
+                <img src="/sprites/v2/128/feedback/stamp.png" alt="" className="btn-icon" />
+                {archivingId === v.id ? '归档中...' : '清除漏洞'}
               </button>
             </div>
           </div>
@@ -63,16 +73,25 @@ export default function ReviewPanel() {
       </div>
 
       {clearedVulns.length > 0 && (
-        <div style={{ marginTop: 24 }}>
-          <h3 style={{ marginBottom: 12, color: '#888', fontSize: 14 }}>
-            📂 已归档漏洞 ({clearedVulns.length})
+        <div className="cleared-section">
+          <h3>
+            <img src="/sprites/v2/128/folders/folder-archive.png" alt="" className="section-icon" />
+            已归档漏洞 ({clearedVulns.length})
           </h3>
           <div className="vuln-list">
             {clearedVulns.map(v => (
               <div key={v.id} className="vuln-card cleared">
                 <div className="vuln-header">
+                  <img 
+                    src={`/sprites/v2/128/folders/folder-${v.subject === '会计' ? 'accounting' : v.subject === '税法' ? 'tax' : 'law'}.png`} 
+                    alt="" 
+                    className="vuln-folder-icon" 
+                  />
                   <span className="vuln-subject">{v.subject}</span>
-                  <span style={{ color: '#2ecc71', fontSize: 12 }}>✅ 已清除</span>
+                  <span className="cleared-badge">
+                    <img src="/sprites/v2/128/feedback/pass-stamp.png" alt="" />
+                    已清除
+                  </span>
                 </div>
                 <div className="vuln-topic">{v.topic}</div>
                 <div className="vuln-reason">{v.mistakeReason}</div>

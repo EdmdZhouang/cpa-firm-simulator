@@ -1130,3 +1130,392 @@ body {
     gap: 6px;
   }
 }
+
+/* ===== V1.2 PNG Asset Styles ===== */
+
+/* Resource bar icons */
+.resource-icon-img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Button icons */
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Office info icons */
+.office-info-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Environment props */
+.pixel-window {
+  top: 20px;
+  left: 20px;
+  width: 64px;
+  height: 64px;
+}
+
+.pixel-window img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pixel-clock {
+  top: 20px;
+  right: 120px;
+  width: 40px;
+  height: 40px;
+}
+
+.pixel-clock img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pixel-coffee {
+  bottom: 210px;
+  left: 30%;
+  width: 32px;
+  height: 32px;
+}
+
+.pixel-coffee img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Updated file pile with PNG */
+.file-pile {
+  position: absolute;
+  bottom: 100px;
+  right: 120px;
+  width: 48px;
+  height: 48px;
+}
+
+.file-pile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.file-pile-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--pixel-danger);
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+}
+
+/* Updated risk alert */
+.risk-alert {
+  position: absolute;
+  top: 20px;
+  right: 180px;
+  width: 40px;
+  height: 40px;
+  animation: alertBlink 0.8s ease infinite;
+}
+
+.risk-alert img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Updated bill pile */
+.bill-pile {
+  position: absolute;
+  bottom: 90px;
+  left: 80px;
+  width: 40px;
+  height: 40px;
+}
+
+.bill-pile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Case board icon */
+.case-board-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* Section folder icon */
+.section-folder-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* Case card with folder layout */
+.case-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--pixel-panel-light);
+  border: 3px solid var(--pixel-border);
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-folder-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.case-folder-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.case-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.case-status-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+.case-status-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.locked-overlay {
+  width: 40px;
+  height: 40px;
+}
+
+.active-indicator {
+  width: 32px;
+  height: 32px;
+  animation: casePulse 1.5s ease infinite;
+}
+
+/* Remove old pseudo-element overlays */
+.case-card.locked::after,
+.case-card.completed::after {
+  display: none;
+}
+
+/* Battle feedback overlay */
+.feedback-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  z-index: 50;
+  pointer-events: none;
+  animation: feedbackStamp 1.2s ease forwards;
+}
+
+.feedback-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+@keyframes feedbackStamp {
+  0% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+  30% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  70% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+}
+
+/* Battle title icon */
+.battle-title-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Review panel icons */
+.panel-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.empty-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.section-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.vuln-folder-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  margin-right: 8px;
+}
+
+.cleared-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--pixel-success);
+  font-size: 12px;
+}
+
+.cleared-badge img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+.review-empty {
+  color: var(--pixel-success);
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.cleared-section {
+  margin-top: 24px;
+}
+
+.cleared-section h3 {
+  margin-bottom: 12px;
+  color: #888;
+  font-size: 14px;
+}
+
+/* Remove old vuln card pseudo elements */
+.vuln-card::before {
+  display: none;
+}
+
+/* Updated player sprite sizing */
+.pixel-player {
+  bottom: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  animation: playerIdle 2s ease-in-out infinite;
+}
+
+.pixel-player img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Updated desk sizing */
+.pixel-desk {
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 100px;
+}
+
+.pixel-desk img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Updated cabinet sizing */
+.pixel-cabinet {
+  top: 60px;
+  right: 20px;
+  width: 70px;
+  height: 120px;
+}
+
+.pixel-cabinet img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Updated printer sizing */
+.pixel-printer {
+  top: 80px;
+  left: 30px;
+  width: 50px;
+  height: 40px;
+}
+
+.pixel-printer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}

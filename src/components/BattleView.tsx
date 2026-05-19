@@ -14,6 +14,7 @@ export default function BattleView() {
   const [lastResult, setLastResult] = useState<{ isCorrect: boolean; message: string } | null>(null);
   const [answeredQuestion, setAnsweredQuestion] = useState<Question | null>(null);
   const [questionKey, setQuestionKey] = useState(0);
+  const [feedbackAnim, setFeedbackAnim] = useState<'correct' | 'wrong' | null>(null);
 
   if (!currentCase || !battleState) return null;
 
@@ -24,6 +25,8 @@ export default function BattleView() {
     setLastResult(res);
     setShowResult(true);
     setSelectedOption(null);
+    setFeedbackAnim(res.isCorrect ? 'correct' : 'wrong');
+    setTimeout(() => setFeedbackAnim(null), 1200);
   };
 
   const handleNext = () => {
@@ -38,9 +41,24 @@ export default function BattleView() {
 
   return (
     <div className="battle-view">
+      {/* Feedback overlay */}
+      {feedbackAnim === 'correct' && (
+        <div className="feedback-overlay correct-overlay">
+          <img src="/sprites/v2/128/feedback/pass-stamp.png" alt="正确" />
+        </div>
+      )}
+      {feedbackAnim === 'wrong' && (
+        <div className="feedback-overlay wrong-overlay">
+          <img src="/sprites/v2/128/feedback/fail-stamp.png" alt="错误" />
+        </div>
+      )}
+
       {/* 战斗头部 - 项目作战台 */}
       <div className="battle-header">
-        <div className="battle-title">⚔️ {currentCase.title}</div>
+        <div className="battle-title">
+          <img src="/sprites/v2/128/folders/folder-accounting.png" alt="" className="battle-title-icon" />
+          {currentCase.title}
+        </div>
         <div className="battle-bars">
           <div className="bar-row">
             <span className="bar-label">进度</span>
@@ -68,10 +86,10 @@ export default function BattleView() {
           </div>
         </div>
         <div className="battle-stats">
-          <span>📋 答题: {battleState.questionsAnswered}</span>
-          <span>✓ 正确: {battleState.correctCount}</span>
-          <span>📊 正确率: {correctRate}%</span>
-          <span>⏱️ 剩余: {battleState.turnsRemaining}回合</span>
+          <span>答题: {battleState.questionsAnswered}</span>
+          <span>正确: {battleState.correctCount}</span>
+          <span>正确率: {correctRate}%</span>
+          <span>剩余: {battleState.turnsRemaining}回合</span>
         </div>
       </div>
 
@@ -79,7 +97,7 @@ export default function BattleView() {
       {displayedQuestion && (
         <div className="question-area" key={questionKey}>
           <div className="question-scenario">
-            📖 {displayedQuestion.scenario}
+            {displayedQuestion.scenario}
           </div>
           
           <div className="question-text">{displayedQuestion.question}</div>
@@ -102,13 +120,14 @@ export default function BattleView() {
                 onClick={handleAnswer}
                 disabled={selectedOption === null}
               >
-                ✓ 提交答案
+                <img src="/sprites/v2/128/feedback/stamp.png" alt="" className="btn-icon" />
+                提交答案
               </button>
             </>
           ) : (
             <>
               <div className={`feedback-area ${lastResult?.isCorrect ? 'correct' : 'wrong'}`}>
-                {lastResult?.isCorrect ? '✅ 回答正确！进度推进' : '❌ 回答错误！风险增加'}
+                {lastResult?.isCorrect ? '回答正确！进度推进' : '回答错误！风险增加'}
               </div>
               
               {!lastResult?.isCorrect && (
@@ -134,7 +153,8 @@ export default function BattleView() {
           disabled={playerState.resources.energy < 15}
           title="消耗15精力，提高命中率"
         >
-          📚 学习专项 (-15⚡)
+          <img src="/sprites/v2/128/character/player-reading.png" alt="" className="btn-icon" />
+          学习专项 (-15⚡)
         </button>
         <button 
           className="action-btn" 
@@ -142,7 +162,8 @@ export default function BattleView() {
           disabled={playerState.resources.energy < 5 || playerState.resources.cash < 1000}
           title="消耗5精力+1000现金，降低风险"
         >
-          👨‍💼 请专家 (-5⚡ -1000💰)
+          <img src="/sprites/v2/128/character/player-accountant.png" alt="" className="btn-icon" />
+          请专家 (-5⚡ -1000💰)
         </button>
         <button 
           className="action-btn" 
@@ -150,21 +171,24 @@ export default function BattleView() {
           disabled={playerState.resources.energy < 15}
           title="消耗15精力，降低翻车概率"
         >
-          🔍 质量控制 (-15⚡)
+          <img src="/sprites/v2/128/feedback/progress-arrow.png" alt="" className="btn-icon" />
+          质量控制 (-15⚡)
         </button>
         <button 
           className="action-btn" 
           onClick={() => performAction('rest')}
           title="恢复30精力"
         >
-          ☕ 休息 (+30⚡)
+          <img src="/sprites/v2/128/office/coffee-cup.png" alt="" className="btn-icon" />
+          休息 (+30⚡)
         </button>
         <button 
           className="action-btn" 
           onClick={endTurn}
           title="结束本回合，扣除固定成本"
         >
-          🌙 结束回合
+          <img src="/sprites/v2/128/office/wall-clock.png" alt="" className="btn-icon" />
+          结束回合
         </button>
       </div>
     </div>
