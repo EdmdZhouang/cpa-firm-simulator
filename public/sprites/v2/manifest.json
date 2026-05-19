@@ -1,0 +1,539 @@
+{
+  "version": "2026-05-19.v1",
+  "description": "CPA firm simulator processed pixel-art sprite assets. Generated from local AI image batches; source contact sheets are intentionally excluded.",
+  "sizes": [
+    128,
+    256
+  ],
+  "assets": [
+    {
+      "id": "player-accountant",
+      "category": "character",
+      "sourceFile": "player-accountant.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "28f48ca5eeb05c66c1d9ae16d86ef8c4e7011dbcc2cc532f04b973dad636828d",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-accountant.png",
+        "256": "/sprites/v2/256/character/player-accountant.png"
+      }
+    },
+    {
+      "id": "player-celebrate",
+      "category": "character",
+      "sourceFile": "player-celebrate.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "7e8bad3e029675eefb54a512c23a497e39649177cbce4cc4f6461add8b68d4cc",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-celebrate.png",
+        "256": "/sprites/v2/256/character/player-celebrate.png"
+      }
+    },
+    {
+      "id": "player-focused-document",
+      "category": "character",
+      "sourceFile": "player-focused-document.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "1fb5fd6727af9e7ec47019209707f9c935aceeef3254f7864c83592eaa503c9b",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-focused-document.png",
+        "256": "/sprites/v2/256/character/player-focused-document.png"
+      }
+    },
+    {
+      "id": "player-idle",
+      "category": "character",
+      "sourceFile": "player-idle.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "13b51067d1d4b01ac9aece28b7f1c563cbf77273eba3155ff5fe1892068c1186",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-idle.png",
+        "256": "/sprites/v2/256/character/player-idle.png"
+      }
+    },
+    {
+      "id": "player-phone-distraction",
+      "category": "character",
+      "sourceFile": "player-phone-distraction.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "6e329031ac12c0ed7dab51ba7e1639934a2206e80d82ecd4c1425d0014db6cc4",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-phone-distraction.png",
+        "256": "/sprites/v2/256/character/player-phone-distraction.png"
+      }
+    },
+    {
+      "id": "player-reading",
+      "category": "character",
+      "sourceFile": "player-reading.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "099a8088bda6b9197654b2d32791090cc2f165e839f5fc6f277c22d1aaa17cd9",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-reading.png",
+        "256": "/sprites/v2/256/character/player-reading.png"
+      }
+    },
+    {
+      "id": "player-stamping",
+      "category": "character",
+      "sourceFile": "player-stamping.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "00d04dc65de1785fbb12092c85fba68c4475ce40fde516e3531da3f90a4073b3",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-stamping.png",
+        "256": "/sprites/v2/256/character/player-stamping.png"
+      }
+    },
+    {
+      "id": "player-tired-1",
+      "category": "character",
+      "sourceFile": "player-tired-1.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "3dfa507369ceb78618fe56d544473e99a5a1ddb5208797d2c7196d1d2f5bd863",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-tired-1.png",
+        "256": "/sprites/v2/256/character/player-tired-1.png"
+      }
+    },
+    {
+      "id": "player-tired-2",
+      "category": "character",
+      "sourceFile": "player-tired-2.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "3dfa507369ceb78618fe56d544473e99a5a1ddb5208797d2c7196d1d2f5bd863",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-tired-2.png",
+        "256": "/sprites/v2/256/character/player-tired-2.png"
+      },
+      "duplicateOf": "player-tired-1"
+    },
+    {
+      "id": "player-working-computer",
+      "category": "character",
+      "sourceFile": "player-working-computer.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "524717866a57d9c8d4a8449059a7d740a0f89d3f319db1b07f54114e7bbb11cc",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-working-computer.png",
+        "256": "/sprites/v2/256/character/player-working-computer.png"
+      }
+    },
+    {
+      "id": "player-working-desk",
+      "category": "character",
+      "sourceFile": "player-working-desk.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "90af83c64f2eb7e33234c4c861af3325494a139454c2cb6c78a216f1f0db6a23",
+      "variants": {
+        "128": "/sprites/v2/128/character/player-working-desk.png",
+        "256": "/sprites/v2/256/character/player-working-desk.png"
+      }
+    },
+    {
+      "id": "alert-lamp",
+      "category": "feedback",
+      "sourceFile": "alert-lamp.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "5cdd0d106d98826fa784b14a123a01560aef6b687a824a76903d3d7633406c49",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/alert-lamp.png",
+        "256": "/sprites/v2/256/feedback/alert-lamp.png"
+      }
+    },
+    {
+      "id": "coin-reward",
+      "category": "feedback",
+      "sourceFile": "coin-reward.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "b13062674d57096f647576707ec91a63fb14d9eebd16344272b4564312d7ac7a",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/coin-reward.png",
+        "256": "/sprites/v2/256/feedback/coin-reward.png"
+      }
+    },
+    {
+      "id": "fail-stamp",
+      "category": "feedback",
+      "sourceFile": "fail-stamp.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "838d53532576288284f9dcd5cacef4d4d15de062d290035d62cffd7a7de7fc35",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/fail-stamp.png",
+        "256": "/sprites/v2/256/feedback/fail-stamp.png"
+      }
+    },
+    {
+      "id": "fatigue-low-energy",
+      "category": "feedback",
+      "sourceFile": "fatigue-low-energy.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "24c6e84b6dd3efc683052f482ade28af1913d80def0006a248b2681021053d88",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/fatigue-low-energy.png",
+        "256": "/sprites/v2/256/feedback/fatigue-low-energy.png"
+      }
+    },
+    {
+      "id": "level-up-badge",
+      "category": "feedback",
+      "sourceFile": "level-up-badge.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "263ad25443281267666f92c578a43141cba8d297606fabd72429fd41974e2a74",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/level-up-badge.png",
+        "256": "/sprites/v2/256/feedback/level-up-badge.png"
+      }
+    },
+    {
+      "id": "locked-seal",
+      "category": "feedback",
+      "sourceFile": "locked-seal.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "318ba535127cb29865d6fd9117b322b8d3fe5312cd504176fcfa14fc8d7e3311",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/locked-seal.png",
+        "256": "/sprites/v2/256/feedback/locked-seal.png"
+      }
+    },
+    {
+      "id": "pass-stamp",
+      "category": "feedback",
+      "sourceFile": "pass-stamp.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "de3dec794d67b1e26457628d48cc747e5209d9c7b1f189130c7d9cde055b0ef0",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/pass-stamp.png",
+        "256": "/sprites/v2/256/feedback/pass-stamp.png"
+      }
+    },
+    {
+      "id": "phone-distraction-bubble",
+      "category": "feedback",
+      "sourceFile": "phone-distraction-bubble.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "2686445240c30c743d3bd02ed6c1bb2b33688bc3f9a0d4cc03b4b513be31384b",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/phone-distraction-bubble.png",
+        "256": "/sprites/v2/256/feedback/phone-distraction-bubble.png"
+      }
+    },
+    {
+      "id": "progress-arrow",
+      "category": "feedback",
+      "sourceFile": "progress-arrow.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "3985c2fa343e783ebfb957dbdc479bd4e19f099f3c2a7604fe44c0e727fdce7c",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/progress-arrow.png",
+        "256": "/sprites/v2/256/feedback/progress-arrow.png"
+      }
+    },
+    {
+      "id": "reputation-star-badge",
+      "category": "feedback",
+      "sourceFile": "reputation-star-badge.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "867d8e80c40a441a2669a3d388504ab8ad8b0156987c0e92a681c6f9b83d5ba6",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/reputation-star-badge.png",
+        "256": "/sprites/v2/256/feedback/reputation-star-badge.png"
+      }
+    },
+    {
+      "id": "risk-warning-popup",
+      "category": "feedback",
+      "sourceFile": "risk-warning-popup.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "54ca18910b3718aa98a69d62fa3b9ea660d669809205ee84ee7f84746c3c244f",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/risk-warning-popup.png",
+        "256": "/sprites/v2/256/feedback/risk-warning-popup.png"
+      }
+    },
+    {
+      "id": "stamp",
+      "category": "feedback",
+      "sourceFile": "stamp.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "05bb3d149f6960a6e718e7de21cb5cec584978e59791682a996d1365d1fc9660",
+      "variants": {
+        "128": "/sprites/v2/128/feedback/stamp.png",
+        "256": "/sprites/v2/256/feedback/stamp.png"
+      }
+    },
+    {
+      "id": "file-stack",
+      "category": "folders",
+      "sourceFile": "file-stack.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "467c3ccef94600616ceac4585dc056d1a4b8bf10168d31895eeabcaf62105cc9",
+      "variants": {
+        "128": "/sprites/v2/128/folders/file-stack.png",
+        "256": "/sprites/v2/256/folders/file-stack.png"
+      }
+    },
+    {
+      "id": "folder-accounting",
+      "category": "folders",
+      "sourceFile": "folder-accounting.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "30502d2c8f62ebd10c5bfa16291f9880c238ca84ecab45daf03cb54484c5e34b",
+      "variants": {
+        "128": "/sprites/v2/128/folders/folder-accounting.png",
+        "256": "/sprites/v2/256/folders/folder-accounting.png"
+      }
+    },
+    {
+      "id": "folder-archive",
+      "category": "folders",
+      "sourceFile": "folder-archive.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "cca04a1c29f27bdb3f601d8a2d6d77ad1759e95cf35a2f8fd8ec67ca1dea4e74",
+      "variants": {
+        "128": "/sprites/v2/128/folders/folder-archive.png",
+        "256": "/sprites/v2/256/folders/folder-archive.png"
+      }
+    },
+    {
+      "id": "folder-law",
+      "category": "folders",
+      "sourceFile": "folder-law.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "d65f296d65432e8e579c590ed0731f6995b21ce29fa3fab56bafe09ec7b9afae",
+      "variants": {
+        "128": "/sprites/v2/128/folders/folder-law.png",
+        "256": "/sprites/v2/256/folders/folder-law.png"
+      }
+    },
+    {
+      "id": "folder-risk",
+      "category": "folders",
+      "sourceFile": "folder-risk.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "fc6916c8ab4a1a534a004e2a4891880cc591a3229c0aa025de6b3c541be3db27",
+      "variants": {
+        "128": "/sprites/v2/128/folders/folder-risk.png",
+        "256": "/sprites/v2/256/folders/folder-risk.png"
+      }
+    },
+    {
+      "id": "folder-tax",
+      "category": "folders",
+      "sourceFile": "folder-tax.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "ebb47780506090ff060cfb1e9f08c88b435a38cb0c8424f53eb5a926f3cc0d21",
+      "variants": {
+        "128": "/sprites/v2/128/folders/folder-tax.png",
+        "256": "/sprites/v2/256/folders/folder-tax.png"
+      }
+    },
+    {
+      "id": "review-note-stack",
+      "category": "folders",
+      "sourceFile": "review-note-stack.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "dab069138054715c57e56046b339740e0e39a2bde967535027da93e214a17a11",
+      "variants": {
+        "128": "/sprites/v2/128/folders/review-note-stack.png",
+        "256": "/sprites/v2/256/folders/review-note-stack.png"
+      }
+    },
+    {
+      "id": "calculator",
+      "category": "office",
+      "sourceFile": "calculator.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "c979e7d5810a097352947ee3b57deb315c6280c4562a317420182c4c4aa349e4",
+      "variants": {
+        "128": "/sprites/v2/128/office/calculator.png",
+        "256": "/sprites/v2/256/office/calculator.png"
+      }
+    },
+    {
+      "id": "case-board",
+      "category": "office",
+      "sourceFile": "case-board.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "4ff1ac8c983fb3dbe8a4ecd9dae3e01b8130f311190a1800a535df158c39c859",
+      "variants": {
+        "128": "/sprites/v2/128/office/case-board.png",
+        "256": "/sprites/v2/256/office/case-board.png"
+      }
+    },
+    {
+      "id": "coffee-cup",
+      "category": "office",
+      "sourceFile": "coffee-cup.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "afd67bc490e3fa7625cae81a694a2a66aea62f7474bb792818e7a0b51df035e2",
+      "variants": {
+        "128": "/sprites/v2/128/office/coffee-cup.png",
+        "256": "/sprites/v2/256/office/coffee-cup.png"
+      }
+    },
+    {
+      "id": "computer-screen",
+      "category": "office",
+      "sourceFile": "computer-screen.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "b6e7841d283153339f54da848c37eb46cabaec09714fc3bf4de81493b40638ec",
+      "variants": {
+        "128": "/sprites/v2/128/office/computer-screen.png",
+        "256": "/sprites/v2/256/office/computer-screen.png"
+      }
+    },
+    {
+      "id": "desk-computer",
+      "category": "office",
+      "sourceFile": "desk-computer.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "0e6ca5bf9724f18839a10a8408012fffe6a7d32dcc5caa42b525ed4904ba4e5f",
+      "variants": {
+        "128": "/sprites/v2/128/office/desk-computer.png",
+        "256": "/sprites/v2/256/office/desk-computer.png"
+      }
+    },
+    {
+      "id": "filing-cabinet",
+      "category": "office",
+      "sourceFile": "filing-cabinet.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "5b86d855804057e9fba8e53230fa7bebecd2024657cff75239c35dafaea77e95",
+      "variants": {
+        "128": "/sprites/v2/128/office/filing-cabinet.png",
+        "256": "/sprites/v2/256/office/filing-cabinet.png"
+      }
+    },
+    {
+      "id": "office-chair",
+      "category": "office",
+      "sourceFile": "office-chair.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "6d7ff3efc12f8b69dde300957ecd15190c160de05f6bbcd2e7e5c68905d6bb8f",
+      "variants": {
+        "128": "/sprites/v2/128/office/office-chair.png",
+        "256": "/sprites/v2/256/office/office-chair.png"
+      }
+    },
+    {
+      "id": "printer",
+      "category": "office",
+      "sourceFile": "printer.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "a0193404c7ee89c6b8b871696e7037943b6bf5c8441833caa229182ba6b2ed49",
+      "variants": {
+        "128": "/sprites/v2/128/office/printer.png",
+        "256": "/sprites/v2/256/office/printer.png"
+      }
+    },
+    {
+      "id": "trash-bin",
+      "category": "office",
+      "sourceFile": "trash-bin.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "2f169f1f124ae7ba47c2703ae85decb88336ddf1539e78451cecb6243b5ea698",
+      "variants": {
+        "128": "/sprites/v2/128/office/trash-bin.png",
+        "256": "/sprites/v2/256/office/trash-bin.png"
+      }
+    },
+    {
+      "id": "wall-clock",
+      "category": "office",
+      "sourceFile": "wall-clock.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "5d6793ccca5d3543edf4ebd8226d0919e59fc29d9e06e3fb7085cf9f6f518aac",
+      "variants": {
+        "128": "/sprites/v2/128/office/wall-clock.png",
+        "256": "/sprites/v2/256/office/wall-clock.png"
+      }
+    },
+    {
+      "id": "whiteboard",
+      "category": "office",
+      "sourceFile": "whiteboard.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "f2ef255c9249f1ddd89767e93a35f8c197b7dba1add9b9fa2e7bfafd14efc1f8",
+      "variants": {
+        "128": "/sprites/v2/128/office/whiteboard.png",
+        "256": "/sprites/v2/256/office/whiteboard.png"
+      }
+    },
+    {
+      "id": "window-sunny",
+      "category": "office",
+      "sourceFile": "window-sunny.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "10ce0dcc776189c15f8fec64781dac38b555c93e6c72fca9555d106876c6239b",
+      "variants": {
+        "128": "/sprites/v2/128/office/window-sunny.png",
+        "256": "/sprites/v2/256/office/window-sunny.png"
+      }
+    },
+    {
+      "id": "wall-panel",
+      "category": "environment",
+      "sourceFile": "wall-panel.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "3d9f5270cebaa278c4eff6c418d07980173484955f4a48f99c7bfdd036462a00",
+      "variants": {
+        "128": "/sprites/v2/128/environment/wall-panel.png",
+        "256": "/sprites/v2/256/environment/wall-panel.png"
+      }
+    },
+    {
+      "id": "wood-floor-tile",
+      "category": "environment",
+      "sourceFile": "wood-floor-tile.png",
+      "sourceWidth": 1254,
+      "sourceHeight": 1254,
+      "sourceSha256": "b75e8328a6c8a4d578098bc61e89154588b7c83bc4380db01dd1c978ff9c3bf3",
+      "variants": {
+        "128": "/sprites/v2/128/environment/wood-floor-tile.png",
+        "256": "/sprites/v2/256/environment/wood-floor-tile.png"
+      }
+    }
+  ]
+}
