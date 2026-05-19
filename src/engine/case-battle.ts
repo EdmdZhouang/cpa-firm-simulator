@@ -1,4 +1,4 @@
-import type { BattleState, Case, Question, Resources, Skills } from '../types/game';
+import type { BattleState, Case, Question, Resources } from '../types/game';
 
 export function initBattleState(caseData: Case): BattleState {
   return {
@@ -16,8 +16,7 @@ export function initBattleState(caseData: Case): BattleState {
 export function processAnswer(
   battle: BattleState,
   question: Question,
-  selectedAnswer: number,
-  _skills: Skills
+  selectedAnswer: number
 ): { newBattle: BattleState; isCorrect: boolean; resourceChanges: Partial<Resources> } {
   const isCorrect = selectedAnswer === question.answer;
   

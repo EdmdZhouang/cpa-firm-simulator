@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { useGameStore } from '../store/game-store';
 import { getCorrectRate } from '../engine/case-battle';
+import type { Question } from '../types/game';
 
 export default function BattleView() {
   const { 
     currentCase, currentQuestion, battleState, playerState,
-    answerQuestion, useAction, endTurn
+    answerQuestion, useAction: performAction, endTurn
   } = useGameStore();
   
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [lastResult, setLastResult] = useState<{ isCorrect: boolean; message: string } | null>(null);
+  const [answeredQuestion, setAnsweredQuestion] = useState<Question | null>(null);
   const [questionKey, setQuestionKey] = useState(0);
 
   if (!currentCase || !battleState) return null;
 
   const handleAnswer = () => {
     if (selectedOption === null || !currentQuestion) return;
+    setAnsweredQuestion(currentQuestion);
     const res = answerQuestion(selectedOption);
     setLastResult(res);
     setShowResult(true);
@@ -26,10 +29,12 @@ export default function BattleView() {
   const handleNext = () => {
     setShowResult(false);
     setLastResult(null);
+    setAnsweredQuestion(null);
     setQuestionKey(k => k + 1);
   };
 
   const correctRate = getCorrectRate(battleState);
+  const displayedQuestion = showResult && answeredQuestion ? answeredQuestion : currentQuestion;
 
   return (
     <div className="battle-view">
@@ -71,18 +76,18 @@ export default function BattleView() {
       </div>
 
       {/* 题目区域 */}
-      {currentQuestion && (
+      {displayedQuestion && (
         <div className="question-area" key={questionKey}>
           <div className="question-scenario">
-            📖 {currentQuestion.scenario}
+            📖 {displayedQuestion.scenario}
           </div>
           
-          <div className="question-text">{currentQuestion.question}</div>
+          <div className="question-text">{displayedQuestion.question}</div>
           
           {!showResult ? (
             <>
               <div className="options-list">
-                {currentQuestion.options.map((opt, idx) => (
+                {displayedQuestion.options.map((opt, idx) => (
                   <button
                     key={idx}
                     className={`option-btn ${selectedOption === idx ? 'selected' : ''}`}
@@ -109,7 +114,7 @@ export default function BattleView() {
               {!lastResult?.isCorrect && (
                 <div className="explanation">
                   <strong>复核意见：</strong><br/>
-                  {currentQuestion.explanation}
+                  {displayedQuestion.explanation}
                 </div>
               )}
               
@@ -125,7 +130,7 @@ export default function BattleView() {
       <div className="action-panel">
         <button 
           className="action-btn" 
-          onClick={() => useAction('study')} 
+          onClick={() => performAction('study')} 
           disabled={playerState.resources.energy < 15}
           title="消耗15精力，提高命中率"
         >
@@ -133,7 +138,7 @@ export default function BattleView() {
         </button>
         <button 
           className="action-btn" 
-          onClick={() => useAction('expert')} 
+          onClick={() => performAction('expert')} 
           disabled={playerState.resources.energy < 5 || playerState.resources.cash < 1000}
           title="消耗5精力+1000现金，降低风险"
         >
@@ -141,7 +146,7 @@ export default function BattleView() {
         </button>
         <button 
           className="action-btn" 
-          onClick={() => useAction('qc')} 
+          onClick={() => performAction('qc')} 
           disabled={playerState.resources.energy < 15}
           title="消耗15精力，降低翻车概率"
         >
@@ -149,7 +154,7 @@ export default function BattleView() {
         </button>
         <button 
           className="action-btn" 
-          onClick={() => useAction('rest')}
+          onClick={() => performAction('rest')}
           title="恢复30精力"
         >
           ☕ 休息 (+30⚡)

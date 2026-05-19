@@ -5,6 +5,7 @@ import ResourceBar from './components/ResourceBar';
 import BattleView from './components/BattleView';
 import ReviewPanel from './components/ReviewPanel';
 import EventModal from './components/EventModal';
+import { hasSave } from './engine/save-load';
 import './App.css';
 
 function App() {
@@ -19,7 +20,9 @@ function App() {
       fetch('/content/cases.json').then(r => r.json()),
     ]).then(([qData, cData]) => {
       loadContent(qData.questions, cData.cases);
-      load();
+      if (hasSave()) {
+        load();
+      }
     }).catch(err => {
       console.error('加载内容失败:', err);
     });
