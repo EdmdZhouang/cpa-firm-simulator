@@ -50,6 +50,15 @@ body {
   -webkit-font-smoothing: none;
 }
 
+#root {
+  width: 100vw;
+  max-width: none;
+  min-height: 100vh;
+  margin: 0;
+  border-inline: 0;
+  text-align: initial;
+}
+
 /* ===== 游戏容器 ===== */
 .game-container {
   width: 100vw;

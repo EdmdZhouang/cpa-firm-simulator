@@ -37,24 +37,40 @@ export class OfficeScene extends Phaser.Scene {
     this.createInteractiveObjects();
     this.createPlayer();
     this.createStateIndicators();
+    this.syncState(this.currentState);
   }
 
   private createBackground() {
-    const wall = this.add.tileSprite(
-      GAME_WIDTH / 2, GAME_HEIGHT * 0.3,
-      GAME_WIDTH, GAME_HEIGHT * 0.6,
-      'wall'
-    );
-    wall.setAlpha(0.3);
+    const wallHeight = GAME_HEIGHT * 0.52;
+    const floorTop = wallHeight;
+    const graphics = this.add.graphics();
 
-    const floor = this.add.tileSprite(
-      GAME_WIDTH / 2, GAME_HEIGHT * 0.75,
-      GAME_WIDTH, GAME_HEIGHT * 0.5,
-      'floor'
-    );
-    floor.setAlpha(0.5);
+    graphics.fillStyle(0x3f4350, 1);
+    graphics.fillRect(0, 0, GAME_WIDTH, wallHeight);
+    graphics.fillStyle(0x5b606f, 1);
+    graphics.fillRect(0, floorTop, GAME_WIDTH, GAME_HEIGHT - floorTop);
 
-    this.add.line(0, 0, 0, GAME_HEIGHT * 0.52, GAME_WIDTH, GAME_HEIGHT * 0.52, 0x4a4864, 0.5).setOrigin(0);
+    graphics.lineStyle(1, 0x343846, 0.55);
+    for (let x = 0; x <= GAME_WIDTH; x += 64) {
+      graphics.lineBetween(x, 0, x, GAME_HEIGHT);
+    }
+    for (let y = 0; y <= wallHeight; y += 64) {
+      graphics.lineBetween(0, y, GAME_WIDTH, y);
+    }
+
+    graphics.lineStyle(2, 0x4a3124, 0.45);
+    for (let y = floorTop; y <= GAME_HEIGHT; y += 54) {
+      graphics.lineBetween(0, y, GAME_WIDTH, y);
+    }
+    for (let x = -GAME_HEIGHT; x <= GAME_WIDTH; x += 80) {
+      graphics.lineBetween(x, floorTop, x + GAME_HEIGHT, GAME_HEIGHT);
+    }
+    for (let x = 0; x <= GAME_WIDTH + GAME_HEIGHT; x += 80) {
+      graphics.lineBetween(x, floorTop, x - GAME_HEIGHT, GAME_HEIGHT);
+    }
+
+    graphics.lineStyle(4, 0x2d2b44, 0.9);
+    graphics.lineBetween(0, floorTop, GAME_WIDTH, floorTop);
   }
 
   private createDecorations() {
@@ -76,7 +92,7 @@ export class OfficeScene extends Phaser.Scene {
 
     this.caseBoard = this.add.image(GAME_WIDTH / 2, 200, 'case-board').setScale(0.5);
     this.caseBoard.setInteractive({ cursor: 'pointer' });
-    this.caseBoard.on('pointerdown', () => {
+    this.caseBoard.on('pointerup', () => {
       this.game.events.emit('case-board-clicked');
     });
     this.caseBoard.on('pointerover', () => this.caseBoard.setScale(0.52));
@@ -121,6 +137,7 @@ export class OfficeScene extends Phaser.Scene {
 
   syncState(newState: SceneState) {
     this.currentState = newState;
+    if (!this.player || !this.fileStack || !this.alertLamp || !this.desk) return;
 
     let texture = 'player-idle';
     if (this.currentState.isTired) {

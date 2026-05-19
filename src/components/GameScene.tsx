@@ -20,6 +20,11 @@ export default function GameScene() {
   const vulnCount = vulnerabilities.filter((v) => !v.cleared).length;
   const isHighRisk = resources.risk >= 70;
   const isTired = resources.energy < resources.maxEnergy * 0.3;
+  const bridgeRef = useRef({ activeCaseId, openReview });
+
+  useEffect(() => {
+    bridgeRef.current = { activeCaseId, openReview };
+  }, [activeCaseId, openReview]);
 
   // Initialize Phaser game
   useEffect(() => {
@@ -30,10 +35,12 @@ export default function GameScene() {
     gameRef.current = game;
 
     // Bridge: Phaser events -> React
-    const handleCaseBoard = () => setShowCaseBoard(true);
-    const handleFileStack = () => openReview();
+    const handleCaseBoard = () => {
+      window.setTimeout(() => setShowCaseBoard(true), 120);
+    };
+    const handleFileStack = () => bridgeRef.current.openReview();
     const handleDesk = () => {
-      if (!activeCaseId) {
+      if (!bridgeRef.current.activeCaseId) {
         console.log('先从案件板接案');
       }
     };
@@ -65,12 +72,6 @@ export default function GameScene() {
     scene.syncState(state);
   }, [activeCaseId, vulnCount, isHighRisk, isTired]);
 
-  // Close case board when leaving office
-  const prevPhaseRef = useRef('office');
-  useEffect(() => {
-    prevPhaseRef.current = 'office';
-  }, []);
-
   const handleStartCase = useCallback((caseId: string) => {
     const success = startCase(caseId);
     if (success) {
@@ -79,7 +80,16 @@ export default function GameScene() {
   }, [startCase]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+    <div
+      style={{
+        position: 'relative',
+        flex: '1 1 auto',
+        minHeight: 0,
+        width: '100%',
+        overflow: 'hidden',
+        background: 'var(--pixel-bg)',
+      }}
+    >
       <div
         ref={containerRef}
         style={{
